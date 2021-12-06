@@ -98,66 +98,86 @@
     <section id="info" class="pt-4">
         <div class="container align-content-center animatedParent animateOnce">
             <div class="col-12 col-sm-12 animated fadeInRight slowest">
-<div class="cognito">
-<script src="https://www.cognitoforms.com/s/ykIAZAV4X0qNYEehOJXkuQ"></script>
-<script>Cognito.load("forms", { id: "3" });</script>
-</div>
-                <div id="frmContact" style="display:none">
-                    <div id="mail-status"></div>
+                <!-- <div class="cognito">
+                    <script src="https://www.cognitoforms.com/s/ykIAZAV4X0qNYEehOJXkuQ"></script>
+                    <script>Cognito.load("forms", { id: "3" });</script>
+                </div> -->
+                <div id="frmContact">
                     <div class="form-row mb-4">
                         <div class="col col-12 md-form">
-                            <span id="firstName-info" class="info"></span><br />
-                            <input type="text" name="firstName" id="firstName" class="demoInputBox" />
-                            <label for="firstName">* First Name</label>
+                            <span id="fullName-info" class="info"></span><br />
+                            <input type="text" name="fullName" id="fullName" class="demoInputBox" />
+                            <label for="fullName">* Full Name</label>
                         </div>
-                        <div class="col col-12 md-form">
-                            <span id="lastName-info" class="info"></span><br />
-                            <input type="text" name="lastName" id="lastName" class="demoInputBox" />
-                            <label for="lastName">* Last Name</label>
-                        </div>
-                    </div>
-                    <div class="form-row mb-4">
                         <div class="col col-12 md-form">
                             <span id="userEmail-info" class="info"></span><br />
                             <input type="text" name="userEmail" id="userEmail" class="demoInputBox" />
                             <label for="userEmail">* Email</label>
                         </div>
+                    </div>
+                    <div class="form-row mb-4">
                         <div class="col col-12 md-form">
                             <span id="phone-info" class="info"></span><br />
                             <input type="text" name="phone" id="phone" class="demoInputBox" />
                             <label for="phone">* Phone Number</label>
                         </div>
+                        <div class="col col-12 md-form">
+                            <span id="age-info" class="info"></span><br />
+                            <input type="text" name="age" id="age" class="demoInputBox" />
+                            <label for="age">* Age</label>
+                        </div>
+                    </div>
+                    <div class="form-row mb-4">
+                        <div class="col col-12 md-form radio">
+                            <span id="gender-info" class="info"></span><br />
+                            <p><input type="radio" name="gender" id="gender" value="male" class="demoInputBox" /> Male </p>
+                            <p><input type="radio" name="gender" id="gender" value="female" class="demoInputBox" /> Female </p>
+                            <label for="gender">* Gender</label>
+                        </div>
+                        <div class="col col-12 md-form">
+                            <span id="education-info" class="info"></span><br />
+                            <input type="text" name="education" id="education" class="demoInputBox" />
+                            <label for="education">* Highest Level Of Education</label>
+                        </div>
                     </div>
                     <div class="form-row mb-4">
                         <div class="col col-12 md-form">
-                            <span id="linkedIn-info" class="info"></span><br />
-                            <input type="text" name="linkedIn" id="linkedIn" class="demoInputBox" />
-                            <label for="linkedIn">* LinkedIn URL</label>
+                            <span id="location-info" class="info"></span><br />
+                            <input type="text" name="location" id="location" class="demoInputBox" />
+                            <label for="location">* Where in Lagos do you reside?</label>
                         </div>
-                        <div class="col col-12 md-form">
-                            <span id="portfolio-info" class="info"></span><br />
-                            <input type="text" name="portfolio" id="portfolio" class="demoInputBox" />
-                            <label for="portfolio">* Portfolio URL</label>
+                        <div class="col col-12 md-form radio">
+                            <span id="laptop-info" class="info"></span><br />
+                            <p><input type="radio" name="laptop" id="laptop" value="yes" class="demoInputBox" /> Yes </p>
+                            <p><input type="radio" name="laptop" id="laptop" value="no" class="demoInputBox" /> No </p>
+                            <label for="laptop">* Do you have a laptop?</label>
                         </div>
                     </div>
                     <!--Message-->
                     <div class="md-form col">
                         <span id="message-info" class="info"></span><br />
                         <textarea name="message" id="message" class="demoInputBox form-control md-textarea" rows="5"></textarea>
-                        <label for="message">Please tell us a bit about yourself</label>
+                        <label for="message">Tell us about yourself (Keep it short and exciting)</label>
+                    </div>
+                    <!--Interest-->
+                    <div class="md-form col">
+                        <span id="interest-info" class="info"></span><br />
+                        <textarea name="interest" id="interest" class="demoInputBox form-control md-textarea" rows="5"></textarea>
+                        <label for="interest">Why are you interested in brands and marketing?</label>
                     </div>
                     <!--Question-->
                     <div class="md-form col">
                         <span id="question-info" class="info"></span><br />
                         <textarea name="question" id="question" class="demoInputBox form-control md-textarea" rows="5"></textarea>
-                        <label for="question">Why did the chicken cross the road?</label>
+                        <label for="question">Superman and Captain America are running for President of Nigeria. Who are you supporting and why?(Not less than 40 words)</label>
                     </div>
                     <div class="col form-submit">
                         <button name="submit" class="btnAction btn btn-block" onClick="sendContact();">
-                APPLY FOR THE NEXT CYCLE<span></span><span></span><span></span
-                ><span></span>
-              </button>
+                            APPLY FOR THE NEXT CYCLE<span></span><span></span><span></span><span></span>
+                        </button>
                     </div>
+                    
+                    <div id="mail-status"></div>
                 </div>
             </div>
         </div>
@@ -224,22 +244,28 @@
             if (valid) {
                 jQuery.ajax({
                     url: "contact_mail.php",
-                    data: "firstName=" +
-                        $("#firstName").val() +
-                        "lastName=" +
-                        $("#lastName").val() +
+                    data: "fullName=" +
+                        $("#fullName").val() +
                         "&userEmail=" +
                         $("#userEmail").val() +
                         "&phone=" +
                         $("#phone").val() +
-                        "&linkedIn=" +
-                        $("#linkedIn").val() +
-                        "&portfolio=" +
-                        $("#portfolio").val() +
+                        "&age=" +
+                        $("#age").val() +
+                        "&gender=" +
+                        $("#gender").val() +
+                        "&education=" +
+                        $("#education").val() +
+                        "&location=" +
+                        $("#location").val() +
+                        "&laptop=" +
+                        $("#laptop").val() +
                         "&message=" +
-                        $(message).val() +
+                        $("#message").val() +
+                        "&interest=" +
+                        $("#interest").val() +
                         "&question=" +
-                        $(question).val(),
+                        $("#question").val(),
                     type: "POST",
                     success: function(data) {
                         $("#mail-status").html(data);
@@ -254,14 +280,14 @@
             $(".demoInputBox").css("background-color", "");
             $(".info").html("");
 
-            if (!$("#firstName").val()) {
-                $("#firstName-info").html("(required)");
-                $("#firstName").css("background-color", "#FFFFDF");
+            if (!$("#fullName").val()) {
+                $("#fullName-info").html("(required)");
+                $("#fullName").css("background-color", "#FFFFDF");
                 valid = false;
             }
-            if (!$("#lastName").val()) {
-                $("#lastName-info").html("(required)");
-                $("#lastName").css("background-color", "#FFFFDF");
+            if (!$("#education").val()) {
+                $("#education-info").html("(required)");
+                $("#education").css("background-color", "#FFFFDF");
                 valid = false;
             }
             if (!$("#userEmail").val()) {
@@ -282,19 +308,24 @@
                 $("#phone").css("background-color", "#FFFFDF");
                 valid = false;
             }
-            if (!$("#linkedIn").val()) {
-                $("#linkedIn-info").html("(required)");
-                $("#linkedIn").css("background-color", "#FFFFDF");
+            if (!$("#age").val()) {
+                $("#age-info").html("(required)");
+                $("#age").css("background-color", "#FFFFDF");
                 valid = false;
             }
-            if (!$("#portfolio").val()) {
-                $("#portfolio-info").html("(required)");
-                $("#portfolio").css("background-color", "#FFFFDF");
+            if (!$("#gender").val()) {
+                $("#gender-info").html("(required)");
+                $("#gender").css("background-color", "#FFFFDF");
                 valid = false;
             }
             if (!$("#message").val()) {
                 $("#message-info").html("(required)");
                 $("#message").css("background-color", "#FFFFDF");
+                valid = false;
+            }
+            if (!$("#interest").val()) {
+                $("#interest-info").html("(required)");
+                $("#interest").css("background-color", "#FFFFDF");
                 valid = false;
             }
             if (!$("#question").val()) {
