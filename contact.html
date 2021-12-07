@@ -102,8 +102,8 @@
                     <script src="https://www.cognitoforms.com/s/ykIAZAV4X0qNYEehOJXkuQ"></script>
                     <script>Cognito.load("forms", { id: "3" });</script>
                 </div> -->
-                <div id="frmContact" enctype="multipart/form-data" style="max-width: 100%;width: 800px;margin: 0px auto;">
-                <!-- <form id="frmContact" method="post" enctype="multipart/form-data" style="max-width: 100%;width: 800px;margin: 0px auto;"> -->
+                <!-- <div id="frmContact" enctype="multipart/form-data" style="max-width: 100%;width: 800px;margin: 0px auto;"> -->
+                <form id="frmContact" method="post" enctype="multipart/form-data" style="max-width: 100%;width: 800px;margin: 0px auto;">
                     <div class="form-row mb-4">
                         <div class="col col-12 md-form">
                             <span id="fullName-info" class="info"></span><br />
@@ -179,14 +179,15 @@
                         <label for="file_attach">Submit your Resume (PDF;Max size-2MB)</label>
                     </div>
                     <div class="col form-submit">
-                        <button name="submit" class="btnAction btn btn-block" onClick="sendContact();">
+                        <!-- <button name="submit" class="btnAction btn btn-block" onClick="sendContact();"> -->
+                        <button name="submit" class="btnAction btn btn-block" id="submit">
                             Send Application<span></span><span></span><span></span><span></span>
                         </button>
                     </div>
 
                     <div id="mail-status"></div>
-                <!-- </form> -->
-                </div>
+                </form>
+                <!-- </div> -->
             </div>
         </div>
     </section>
@@ -246,7 +247,8 @@
     <!-- custom Javascript -->
     <script type="text/javascript" src="./js/main.js"></script>
     <script>
-        function sendContact() {
+        // function sendContact() {
+        jQuery("#submit").click(function(e) {
             // jQuery('#frmContact').preventDefault();
             var valid;
             valid = validateContact();
@@ -285,7 +287,7 @@
                     }
                 });
             }
-        }
+        });
 
         function validateContact() {
             var valid = true;
