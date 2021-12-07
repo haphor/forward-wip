@@ -103,7 +103,7 @@
                     <script>Cognito.load("forms", { id: "3" });</script>
                 </div> -->
                 <!-- <div id="frmContact" enctype="multipart/form-data"> -->
-                <form id="frmContact" method="post" enctype="multipart/form-data">
+                <form id="frmContact" method="post" enctype="multipart/form-data" style="max-width: 100%;width: 800px;margin: 0px auto;">
                     <div class="form-row mb-4">
                         <div class="col col-12 md-form">
                             <span id="fullName-info" class="info"></span><br />
@@ -247,6 +247,7 @@
     <script type="text/javascript" src="./js/main.js"></script>
     <script>
         function sendContact() {
+            jQuery('#frmContact').preventDefault();
             var valid;
             valid = validateContact();
             if (valid) {
