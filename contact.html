@@ -102,7 +102,8 @@
                     <script src="https://www.cognitoforms.com/s/ykIAZAV4X0qNYEehOJXkuQ"></script>
                     <script>Cognito.load("forms", { id: "3" });</script>
                 </div> -->
-                <div id="frmContact">
+                <!-- <div id="frmContact" enctype="multipart/form-data"> -->
+                <form id="frmContact" method="post" enctype="multipart/form-data">
                     <div class="form-row mb-4">
                         <div class="col col-12 md-form">
                             <span id="fullName-info" class="info"></span><br />
@@ -171,14 +172,21 @@
                         <textarea name="question" id="question" class="demoInputBox form-control md-textarea" rows="5"></textarea>
                         <label for="question">Superman and Captain America are running for President of Nigeria. Who are you supporting and why?(Not less than 40 words)</label>
                     </div>
+
+                    <div class="form-group">
+                        <span id="file_attach-info" class="info"></span><br />
+                        <input type="file" required name="file_attach" id="file_attach" class="demoInputBox input-field" />
+                        <label for="file_attach">Submit your Resume (PDF;Max size-2MB)</label>
+                    </div>
                     <div class="col form-submit">
                         <button name="submit" class="btnAction btn btn-block" onClick="sendContact();">
-                            APPLY FOR THE NEXT CYCLE<span></span><span></span><span></span><span></span>
+                            Send Application<span></span><span></span><span></span><span></span>
                         </button>
                     </div>
-                    
+
                     <div id="mail-status"></div>
-                </div>
+                </form>
+                <!-- </div> -->
             </div>
         </div>
     </section>
@@ -242,35 +250,39 @@
             var valid;
             valid = validateContact();
             if (valid) {
+
+                // data to be sent to server        
+                var m_data = new FormData();
+                m_data.append('fullName', $('#fullName').val());
+                m_data.append('userEmail', $('#userEmail').val());
+                m_data.append('phone', $('#phone').val());
+                m_data.append('age', $('#age').val());
+                m_data.append('gender', $('#gender').val());
+                m_data.append('education', $('#education').val());
+                m_data.append('location', $('#location').val());
+                m_data.append('laptop', $('#laptop').val());
+                m_data.append('message', $('#message').val());
+                m_data.append('interest', $('#interest').val());
+                m_data.append('question', $('#question').val());
+                m_data.append('file_attach', $('input[name=file_attach]')[0].files[0]);
+
                 jQuery.ajax({
-                    url: "contact_mail.php",
-                    data: "fullName=" +
-                        $("#fullName").val() +
-                        "&userEmail=" +
-                        $("#userEmail").val() +
-                        "&phone=" +
-                        $("#phone").val() +
-                        "&age=" +
-                        $("#age").val() +
-                        "&gender=" +
-                        $("#gender").val() +
-                        "&education=" +
-                        $("#education").val() +
-                        "&location=" +
-                        $("#location").val() +
-                        "&laptop=" +
-                        $("#laptop").val() +
-                        "&message=" +
-                        $("#message").val() +
-                        "&interest=" +
-                        $("#interest").val() +
-                        "&question=" +
-                        $("#question").val(),
-                    type: "POST",
-                    success: function(data) {
-                        $("#mail-status").html(data);
-                    },
-                    error: function() {}
+                    // url: 'contact_mail.php',
+                    url: 'https://afotech.com.ng/contact_mail.php',
+                    data: m_data,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        //load json data from server and output message    
+                        if (response.type == 'error') { //load json data from server and output message    
+                            output = '<div class="error">' + response.text + '</div>';
+                        } else {
+                            output = '<div class="success">' + response.text + '</div>';
+                        }
+                        $("##mail-status").hide().html(output).slideDown();
+                    }
                 });
             }
         }
@@ -333,15 +345,22 @@
                 $("#question").css("background-color", "#FFFFDF");
                 valid = false;
             }
+            if (!$("#file_attach").val()) {
+                $("#file_attach-info").html("(required)");
+                $("#file_attach").css("background-color", "#FFFFDF");
+                valid = false;
+            }
 
             return valid;
         }
     </script>
     <script type="text/javascript">
-        jQuery(window).load(function(){
-           jQuery("#pre_overlay").delay(0).animate({ 'opacity': 0 }, 800, null, function() {
+        jQuery(window).load(function() {
+            jQuery("#pre_overlay").delay(0).animate({
+                'opacity': 0
+            }, 800, null, function() {
                 jQuery('#pre_overlay').fadeOut('slow');
-           });
+            });
         });
     </script>
 </body>
