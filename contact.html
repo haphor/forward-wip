@@ -249,7 +249,7 @@
     <script>
         // function sendContact() {
         jQuery("#submit").click(function(e) {
-            // jQuery('#frmContact').preventDefault();
+            e.preventDefault();
             var valid;
             valid = validateContact();
             if (valid) {
